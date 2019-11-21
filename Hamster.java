@@ -1,20 +1,73 @@
 public class Hamster {
     private String name;
     private int x, y; //current x and y coordinate
-    private String currentDirection;
+    private char currentDirection;
     private int movingX; //moving left = -1, moving right = 1, otherwise 0
     private int movingY; //moving up = -1, moving down = 1, otherwise 0
+    private int foodCollected;
 
     //initiate hamster at 3|6
     public Hamster(String name) {
         setName(name);
         setX(3);
         setY(6);
-        setCurrentDirection("<");
+        setCurrentDirection('<');
     }
 
 
+    public void turnLeft() {
+        switch (getCurrentDirection()) {
+            case '<':
+                setCurrentDirection('v');
+                break;
+            case '^':
+                setCurrentDirection('<');
+                break;
+            case '>':
+                setCurrentDirection('^');
+                break;
+            case 'v':
+                setCurrentDirection('>');
+                break;
+            default:
+                System.out.println("setCurrentDirection OOB! Breaking . . .");
+                System.exit(-1);
+        }
+    }
+
+    public void turnRight() {
+        switch (getCurrentDirection()) {
+            case '<':
+                setCurrentDirection('^');
+                break;
+            case '^':
+                setCurrentDirection('>');
+                break;
+            case '>':
+                setCurrentDirection('v');
+                break;
+            case 'v':
+                setCurrentDirection('<');
+                break;
+            default:
+                System.out.println("setCurrentDirection OOB! Breaking . . .");
+                System.exit(-1);
+        }
+    }
+
     //getters & setters
+
+    public int getFoodCollected(){
+        return foodCollected;
+    }
+
+    public void setFoodCollected(int foodCollected){
+        this.foodCollected = foodCollected;
+    }
+
+    public void collectedFood(){
+        foodCollected++;
+    }
 
     public String getName() {
         return name;
@@ -53,26 +106,27 @@ public class Hamster {
         ;
     }
 
-    public String getCurrentDirection() {
+    public char getCurrentDirection() {
         return currentDirection;
     }
 
-    public void setCurrentDirection(String currentDirection) {
+    public void setCurrentDirection(char currentDirection) {
 
+        //the grid starts top left with x = 0 && y = 0;
         switch (currentDirection) {
-            case "<":
+            case '<':
                 setMovingX(-1);
                 setMovingY(0);
                 break;
-            case "^":
+            case '^':
                 setMovingX(0);
                 setMovingY(-1);
                 break;
-            case ">":
+            case '>':
                 setMovingX(1);
                 setMovingY(0);
                 break;
-            case "v":
+            case 'v':
                 setMovingX(0);
                 setMovingY(1);
                 break;
@@ -81,46 +135,6 @@ public class Hamster {
                 System.exit(-1);
         }
         this.currentDirection = currentDirection;
-    }
-
-    public void turnLeft() {
-        switch (getCurrentDirection()) {
-            case "<":
-                setCurrentDirection("v");
-                break;
-            case "^":
-                setCurrentDirection("<");
-                break;
-            case ">":
-                setCurrentDirection("^");
-                break;
-            case "v":
-                setCurrentDirection(">");
-                break;
-            default:
-                System.out.println("setCurrentDirection OOB! Breaking . . .");
-                System.exit(-1);
-        }
-    }
-
-    public void turnRight() {
-        switch (getCurrentDirection()) {
-            case "<":
-                setCurrentDirection("^");
-                break;
-            case "^":
-                setCurrentDirection(">");
-                break;
-            case ">":
-                setCurrentDirection("v");
-                break;
-            case "v":
-                setCurrentDirection("<");
-                break;
-            default:
-                System.out.println("setCurrentDirection OOB! Breaking . . .");
-                System.exit(-1);
-        }
     }
 
     public int getMovingX() {
