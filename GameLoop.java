@@ -33,8 +33,8 @@ public class GameLoop {
 
             map.printMap();
 
-            int collectedFood = 0;
-            if (collectedFood >= map.getFoodAmount()) {
+
+            if (hamster.getFoodCollected() >= map.getFoodAmount()) {
                 victoryPrint();
             }
 
